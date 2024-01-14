@@ -85,17 +85,16 @@ dnf_list+=("install code")
 dnf_list+=("install dconf-editor")
 
 # i3 windows manager
-dnf_list+=("install i3")
+dnf_list+=("install i3")        # tiling windows manager
+dnf_list+=("install i3blocks")  # run scripts to diplay info in i3bar
 
-# i3blocks
-dnf_list+=("install i3blocks")                 # run scripts to diplay info in i3bar
+# i3/i3blocks and dependencies
+dnf_list+=("install blueman")                  # provides bluetooth tray applet
 dnf_list+=("install fontawesome-fonts-all")    # fonts to display icons
 dnf_list+=("remove default-fonts-other-sans")  # some of these fonts collide with fontawesome
-
-# i3blocklets dependencies
-dnf_list+=("install sysstat")     # [cpu] provides sar and other reporting tools
-dnf_list+=("install lm_sensors")  # [temp_cpu] provides tools for monitoring hardware
-dnf_list+=("install pavucontrol") # [volume] gui for controlling pulseaudio volume
+dnf_list+=("install sysstat")                  # [cpu] provides sar and other reporting tools
+dnf_list+=("install lm_sensors")               # [temp_cpu] provides tools for monitoring hardware
+dnf_list+=("install pavucontrol")              # [volume] gui for controlling pulseaudio volume
 # [temp_gpu] run 20_nvidia_driver_470xx.sh to install nvidia-smi (it is version specific depending on hardware).
 # [nordvpn]  see Internet section
 
