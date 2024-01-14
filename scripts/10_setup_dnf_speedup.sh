@@ -11,8 +11,6 @@
 
 set -e -u -o pipefail
 
-if [[ $EUID -ne 0 ]]; then echo "Please run as root"; exit 1; fi
-
 
 echo "max_parallel_downloads=10" > /etc/dnf/dnf.conf
 echo "fastestmirror=True" > /etc/dnf/dnf.conf

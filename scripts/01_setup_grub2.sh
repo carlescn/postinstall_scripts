@@ -11,8 +11,6 @@
 
 set -e -u -o pipefail
 
-if [[ $EUID -ne 0 ]]; then echo "Please run as root"; exit 1; fi
-
 
 # Force showing boot menu
 grub2-editenv - unset menu_auto_hide

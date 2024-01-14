@@ -12,8 +12,6 @@
 
 set -e -u -o pipefail
 
-if [[ $EUID -ne 0 ]]; then echo "Please run as root"; exit 1; fi
-
 
 # Run only the first time
 basename "$0" >> "$(dirname "$0")/jobs.deny"

@@ -11,8 +11,6 @@
 
 set -e -u -o pipefail
 
-if [[ $EUID -ne 0 ]]; then echo "Please run as root"; exit 1; fi
-
 
 # General rmpfusion-nonfree repo was added by 01_setup_dnf_rpmfusion.sh, so these are innecessary:
 rm /etc/yum.repos.d/rpmfusion-nonfree-steam.repo

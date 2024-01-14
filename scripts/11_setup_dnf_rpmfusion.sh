@@ -11,8 +11,6 @@
 
 set -e -u -o pipefail
 
-if [[ $EUID -ne 0 ]]; then echo "Please run as root"; exit 1; fi
-
 
 # Add rpmfusion-free and rpmfusion-nonfree repositories
 dnf install "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm"
