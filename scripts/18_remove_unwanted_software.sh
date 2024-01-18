@@ -26,7 +26,7 @@ dnf copr list | grep -q 'phracek/PyCharm' && dnf copr remove phracek/PyCharm
 
 # Remove other unwanted packages
 remove_packages=()
-remove_packages+=("firefox")
+# Gnome add-ons
 remove_packages+=("gnome-boxes")
 remove_packages+=("gnome-calendar")
 remove_packages+=("gnome-clocks")
@@ -35,12 +35,15 @@ remove_packages+=("gnome-maps")
 remove_packages+=("gnome-photos")
 remove_packages+=("gnome-tour")
 remove_packages+=("gnome-weather")
+# Support for Chinese, Korean, Japanese, etc. typing
 remove_packages+=("ibus-anthy")
 remove_packages+=("ibus-hangul")
 remove_packages+=("ibus-m17n")
 remove_packages+=("ibus-typing-booster")
 remove_packages+=("ibus-libpinyin")
 remove_packages+=("ibus-libzhuyin")
+# Other sofware I won't be using
+remove_packages+=("firefox")
 remove_packages+=("libreoffice*")
 remove_packages+=("mediawriter")
 remove_packages+=("rhythmbox")
