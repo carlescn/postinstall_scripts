@@ -15,7 +15,14 @@ set -e -u -o pipefail
 # Force showing boot menu
 grub2-editenv - unset menu_auto_hide
 
-# Disable graphical boot screen (show boot messages instead of the Fedora logo)
+
+# Change default options
 cp /etc/default/grub /etc/default/grub.bk
-awk '/GRUB_CMDLINE_LINUX=/ {gsub(" rhgb", "")}; {print}' /etc/default/grub.bk > /etc/default/grub
+
+awk '/^GRUB_TIMEOUT/         { sub("5", "2") }     # lower timeout
+     /^GRUB_TERMINAL_OUTPUT/ { printf "#" }        # prevent low resolution
+     /^GRUB_CMDLINE_LINUX=/  { gsub(" rhgb", "") } # disable graphical boot screen (Fedora logo)
+     {print}
+    ' /etc/default/grub.bk > /etc/default/grub
+
 grub2-mkconfig -o /etc/grub2.cfg
