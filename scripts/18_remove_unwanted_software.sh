@@ -13,13 +13,12 @@ set -e -u -o pipefail
 
 
 # General rmpfusion-nonfree repo was added by 01_setup_dnf_rpmfusion.sh, so these are innecessary:
-rm /etc/yum.repos.d/rpmfusion-nonfree-steam.repo
-rm /etc/yum.repos.d/rpmfusion-nonfree-nvidia-driver.repo
-
+rm -f /etc/yum.repos.d/rpmfusion-nonfree-steam.repo
+rm -f /etc/yum.repos.d/rpmfusion-nonfree-nvidia-driver.repo
 
 # Remove Google Chrome and its repo
-dnf repository-packages google-chrome remove
-rm /etc/yum.repos.d/google-chrome.repo
+dnf repolist | grep -q 'google-chrome' && dnf repository-packages google-chrome remove
+rm -f /etc/yum.repos.d/google-chrome.repo
 
 
 # Remove other unwanted packages
