@@ -20,6 +20,9 @@ rm -f /etc/yum.repos.d/rpmfusion-nonfree-nvidia-driver.repo
 dnf repolist | grep -q 'google-chrome' && dnf repository-packages google-chrome remove
 rm -f /etc/yum.repos.d/google-chrome.repo
 
+# Remove copr repo for PyCharm (if exists)
+dnf copr list | grep -q 'phracek/PyCharm' && dnf copr remove phracek/PyCharm
+
 
 # Remove other unwanted packages
 remove_packages=()
