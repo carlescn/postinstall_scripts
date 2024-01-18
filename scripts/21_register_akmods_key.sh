@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ###################################################################
-# Script Name : 00_register_akmods_key.sh
+# Script Name : 21_register_akmods_key.sh
 # Description : Registers the akmods default key to your Secure Boot
 #             : enabled system to be able to load signed kernel modules.
 # Args        : None
