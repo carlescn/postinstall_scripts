@@ -61,7 +61,7 @@ EOF
 
 ## PACKAGES ##
 
-# [Acacdemic]
+# [Academic]
 
 dnf_list+=("install mendeleydesktop") # reference management
 
@@ -74,9 +74,9 @@ dnf_list+=("install rclone") # backup to cloud services
 
 # [Code]
 
-# VSCode
-add_repo_vscode
-dnf_list+=("install code")
+add_repo_vscode; dnf_list+=("install code")
+dnf_list+=("install gitui")
+dnf_list+=("install shellcheck")
 
 
 # [Desktop]
@@ -89,12 +89,11 @@ dnf_list+=("install i3")        # tiling windows manager
 dnf_list+=("install i3blocks")  # run scripts to diplay info in i3bar
 
 # i3/i3blocks and dependencies
+dnf_list+=("remove default-fonts-other-sans")  # some of these fonts collide with Nerd Fonts
 dnf_list+=("install blueman")                  # provides bluetooth tray applet
-dnf_list+=("install fontawesome-fonts-all")    # fonts to display icons
-dnf_list+=("remove default-fonts-other-sans")  # some of these fonts collide with fontawesome
-dnf_list+=("install sysstat")                  # [cpu] provides sar and other reporting tools
-dnf_list+=("install lm_sensors")               # [temp_cpu] provides tools for monitoring hardware
 dnf_list+=("install pavucontrol")              # [volume] gui for controlling pulseaudio volume
+# [cpu]      sysstat in section System monitoring
+# [temp_cpu] lm_sensors in section System monitoring
 # [temp_gpu] run 20_nvidia_driver_470xx.sh to install nvidia-smi (it is version specific depending on hardware).
 # [nordvpn]  see Internet section
 
@@ -104,6 +103,14 @@ dnf_list+=("install lxappearance")  # tool to manage gtk themes
 dnf_list+=("install neofetch")      # system report
 dnf_list+=("install picom")         # composer (enable transparency)
 dnf_list+=("install rofi")          # app launcher
+
+# Terminal apps
+dnf_list+=("install alacritty") # Terminal emulator
+dnf_list+=("install ranger")    # TUI file manager
+
+# Desktop apps
+dnf_list+=("install thunar") # GTK file manager
+dnf_list+=("install maim")   # take screenshots
 
 
 # [Games]
@@ -116,15 +123,13 @@ dnf_list+=("install zsnes")  # SNES emulator
 # [Internet]
 
 # Browser
-add_repo_brave_browser
-dnf_list+=("install brave-browser")
+add_repo_brave_browser; dnf_list+=("install brave-browser")
 
 # E-mail
 dnf_list+=("install thunderbird")
 
 # VPN
-add_repo_nordvpn
-dnf_list+=("install nordvpn")
+add_repo_nordvpn; dnf_list+=("install nordvpn")
 
 
 # [Localization]
@@ -140,7 +145,6 @@ dnf_list+=("install hyphen-ca")
 
 # [Multimedia]
 
-dnf_list+=("install audacity-freeworld")  # audio editor
 dnf_list+=("install gimp")                # image editor
 dnf_list+=("install avidemux")            # video editor
 dnf_list+=("install vlc")                 # video player
@@ -149,6 +153,14 @@ dnf_list+=("install vlc")                 # video player
 # [Security]
 
 dnf_list+=("install seahorse")
+
+
+# [System monitoring]
+
+dnf_list+=("install btop")        # TUI system monitor
+dnf_list+=("install hwinfo")      # hardware info
+dnf_list+=("install sysstat")     # provides sar and other reporting tools
+dnf_list+=("install lm_sensors")  # tools for monitoring hardware
 
 
 ## INSTALL ##
