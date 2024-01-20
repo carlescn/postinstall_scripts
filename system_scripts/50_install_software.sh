@@ -12,9 +12,6 @@
 set -e -u -o pipefail
 
 
-dnf_list=()
-
-
 ## REPOS ##
 
 architecture=$(uname -m)
@@ -61,109 +58,87 @@ EOF
 
 ## PACKAGES ##
 
-# [Academic]
-
-dnf_list+=("install mendeleydesktop") # reference management
-
-
-# [Backup]
-
-dnf_list+=("install rsync")
-dnf_list+=("install rclone") # backup to cloud services
+install_list=('install')
+remove_list=('remove')
 
 
-# [Code]
+#[Academic]
+install_list+=('mendeleydesktop') # reference management
 
-add_repo_vscode; dnf_list+=("install code")
-dnf_list+=("install gitui")
-dnf_list+=("install shellcheck")
+#[Backup]
+install_list+=('rsync')  # sync files
+install_list+=('rclone') # backup to cloud services
 
+#[Code]
+install_list+=('code'); add_repo_vscode # VS Code
+install_list+=('gitui')                 # TUI git helper
+install_list+=('shellcheck')            # Bash linter
 
-# [Desktop]
-
-# Gnome settings editor
-dnf_list+=("install dconf-editor")
-
+#[Desktop]
 # i3 windows manager
-dnf_list+=("install i3")        # tiling windows manager
-dnf_list+=("install i3blocks")  # run scripts to diplay info in i3bar
+install_list+=('i3')        # tiling windows manager
+install_list+=('i3blocks')  # run scripts to diplay info in i3bar
 
 # i3/i3blocks and dependencies
-dnf_list+=("remove default-fonts-other-sans")  # some of these fonts collide with Nerd Fonts
-dnf_list+=("install blueman")                  # provides bluetooth tray applet
-dnf_list+=("install pavucontrol")              # [volume] gui for controlling pulseaudio volume
-# [cpu]      sysstat in section System monitoring
-# [temp_cpu] lm_sensors in section System monitoring
-# [temp_gpu] run 20_nvidia_driver_470xx.sh to install nvidia-smi (it is version specific depending on hardware).
-# [nordvpn]  see Internet section
+remove_list+=('default-fonts-other-sans')  # some of these fonts collide with Nerd Fonts
+install_list+=('blueman')                  # provides bluetooth tray applet
+install_list+=('pavucontrol')              # [volume] gui for controlling pulseaudio volume
+  # sysstat    [cpu]: in section System monitoring
+  # lm_sensors [temp_cpu]: in section System monitoring
+  # nvidia-smi [temp_gpu]: run 20_nvidia_driver_470xx.sh
+  # nordvpn    [nordvpn]: see Internet section
 
 # Some rice
-dnf_list+=("install feh")           # display desktop wallpaper
-dnf_list+=("install lxappearance")  # tool to manage gtk themes
-dnf_list+=("install neofetch")      # system report
-dnf_list+=("install picom")         # composer (enable transparency)
-dnf_list+=("install rofi")          # app launcher
+install_list+=('feh')           # display desktop wallpaper
+install_list+=('lxappearance')  # tool to manage gtk themes
+install_list+=('neofetch')      # system report
+install_list+=('picom')         # composer (enable transparency)
+install_list+=('rofi')          # app launcher
 
 # Terminal apps
-dnf_list+=("install alacritty") # Terminal emulator
-dnf_list+=("install ranger")    # TUI file manager
+install_list+=('alacritty') # Terminal emulator
+install_list+=('ranger')    # TUI file manager
 
 # Desktop apps
-dnf_list+=("install thunar") # GTK file manager
-dnf_list+=("install maim")   # take screenshots
+install_list+=('dconf-editor') # Gnome settings editor
+install_list+=('thunar')       # GTK file manager
+install_list+=('maim')         # take screenshots
 
+#[Games]
+install_list+=('steam')  # Steam
+install_list+=('pcsxr')  # PSX emulator
+install_list+=('zsnes')  # SNES emulator
 
-# [Games]
+#[Internet]
+install_list+=('brave-browser'); add_repo_brave_browser # Browser
+install_list+=('thunderbird')                           # E-mail
+install_list+=('nordvpn'); add_repo_nordvpn             # VPN
 
-dnf_list+=("install steam")  # Steam
-dnf_list+=("install pcsxr")  # PSX emulator
-dnf_list+=("install zsnes")  # SNES emulator
-
-
-# [Internet]
-
-# Browser
-add_repo_brave_browser; dnf_list+=("install brave-browser")
-
-# E-mail
-dnf_list+=("install thunderbird")
-
-# VPN
-add_repo_nordvpn; dnf_list+=("install nordvpn")
-
-
-# [Localization]
-
+#[Localization]
 # Spell checker
-dnf_list+=("install hunspell-en")
-dnf_list+=("install hyphen-en")
-dnf_list+=("install hunspell-es-ES")
-dnf_list+=("install hyphen-es")
-dnf_list+=("install hunspell-ca")
-dnf_list+=("install hyphen-ca")
+install_list+=('hunspell-en')
+install_list+=('hyphen-en')
+install_list+=('hunspell-es-ES')
+install_list+=('hyphen-es')
+install_list+=('hunspell-ca')
+install_list+=('hyphen-ca')
 
+#[Multimedia]
+install_list+=('gimp')      # image editor
+install_list+=('avidemux')  # video editor
+install_list+=('vlc')       # video player
 
-# [Multimedia]
+#[Security]
+install_list+=('seahorse') # GUI key manager
 
-dnf_list+=("install gimp")                # image editor
-dnf_list+=("install avidemux")            # video editor
-dnf_list+=("install vlc")                 # video player
-
-
-# [Security]
-
-dnf_list+=("install seahorse")
-
-
-# [System monitoring]
-
-dnf_list+=("install btop")        # TUI system monitor
-dnf_list+=("install hwinfo")      # hardware info
-dnf_list+=("install sysstat")     # provides sar and other reporting tools
-dnf_list+=("install lm_sensors")  # tools for monitoring hardware
+#[System monitoring]
+install_list+=('btop')        # TUI system monitor
+install_list+=('hwinfo')      # hardware info
+install_list+=('sysstat')     # provides sar and other reporting tools
+install_list+=('lm_sensors')  # tools for monitoring hardware
 
 
 ## INSTALL ##
 
 # Remove and install packages as defined in list
-dnf --refresh shell <(IFS=$'\n'; echo "${dnf_list[*]}")
+dnf --refresh shell <(echo -e "${remove_list[@]}\n${install_list[@]}")
