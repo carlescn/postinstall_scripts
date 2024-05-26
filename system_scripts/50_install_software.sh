@@ -73,6 +73,7 @@ install_list+=('rclone') # backup to cloud services
 install_list+=('code'); add_repo_vscode # VS Code
 install_list+=('gitui')                 # TUI git helper
 install_list+=('shellcheck')            # Bash linter
+install_list+=('android-tools')			# ADB and other Android tools
 
 #[Desktop]
 # i3 windows manager
@@ -98,6 +99,12 @@ install_list+=('rofi')          # app launcher
 # Terminal apps
 install_list+=('alacritty') # Terminal emulator
 install_list+=('ranger')    # TUI file manager
+install_list+=('w3m')       # Web browser (used for image preview by ranger)
+install_list+=('fzf')       # Fuzzy finder
+install_list+=('fd-find')   # Better find
+install_list+=('bat')       # Better cat
+install_list+=('eza')       # Better ls
+install_list+=('zoxide')    # Better cd
 
 # Desktop apps
 install_list+=('dconf-editor') # Gnome settings editor
@@ -128,6 +135,18 @@ install_list+=('gimp')      # image editor
 install_list+=('avidemux')  # video editor
 install_list+=('vlc')       # video player
 
+#[Virtualization]
+# TODO: review / document this
+install_list+=('bridge-utils')
+install_list+=('libvirt')
+install_list+=('virt-install')
+install_list+=('qemu-kvm')
+install_list+=('libvirt-devel')
+install_list+=('virt-top')
+install_list+=('libguestfs-tools')
+install_list+=('guestfs-tools')
+install_list+=('virt-manager')
+
 #[Security]
 install_list+=('seahorse') # GUI key manager
 
@@ -136,6 +155,9 @@ install_list+=('btop')        # TUI system monitor
 install_list+=('hwinfo')      # hardware info
 install_list+=('sysstat')     # provides sar and other reporting tools
 install_list+=('lm_sensors')  # tools for monitoring hardware
+
+#[Other]
+install_list+=('java-1.8.0-openjdk') # Needed to run AutoFirma app
 
 
 ## INSTALL ##
