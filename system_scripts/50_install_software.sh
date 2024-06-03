@@ -123,17 +123,30 @@ install_list+=('nordvpn'); add_repo_nordvpn             # VPN
 
 #[Localization]
 # Spell checker
-install_list+=('hunspell-en')
-install_list+=('hyphen-en')
-install_list+=('hunspell-es-ES')
-install_list+=('hyphen-es')
-install_list+=('hunspell-ca')
-install_list+=('hyphen-ca')
+install_list+=('hunspell-en')    # English
+install_list+=('hyphen-en')      # English
+install_list+=('hunspell-es-ES') # Spanish
+install_list+=('hyphen-es')      # Spanish
+install_list+=('hunspell-ca')    # Catalan
+install_list+=('hyphen-ca')      # Catalan
 
 #[Multimedia]
 install_list+=('gimp')      # image editor
 install_list+=('avidemux')  # video editor
 install_list+=('vlc')       # video player
+
+#[Security]
+install_list+=('seahorse') # GUI key manager
+
+#[System monitoring]
+install_list+=('btop')        # TUI system monitor
+install_list+=('hwinfo')      # hardware info
+install_list+=('sysstat')     # provides sar and other reporting tools
+install_list+=('lm_sensors')  # tools for monitoring hardware
+
+#[Tools]
+install_list+=('p7zip')           # compress / extract 7z
+install_list+=('cronie-anacron')  # anacron - automate tasks
 
 #[Virtualization]
 # TODO: review / document this
@@ -147,19 +160,8 @@ install_list+=('libguestfs-tools')
 install_list+=('guestfs-tools')
 install_list+=('virt-manager')
 
-#[Security]
-install_list+=('seahorse') # GUI key manager
-
-#[System monitoring]
-install_list+=('btop')        # TUI system monitor
-install_list+=('hwinfo')      # hardware info
-install_list+=('sysstat')     # provides sar and other reporting tools
-install_list+=('lm_sensors')  # tools for monitoring hardware
-
 #[Other]
 install_list+=('java-1.8.0-openjdk') # needed to run AutoFirma app
-install_list+=('p7zip')              # compress / extract 7z
-install_list+=('cronie-anacron')     # anacron - automate tasks
 
 
 ## INSTALL ##
