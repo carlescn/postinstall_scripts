@@ -157,7 +157,9 @@ install_list+=('sysstat')     # provides sar and other reporting tools
 install_list+=('lm_sensors')  # tools for monitoring hardware
 
 #[Other]
-install_list+=('java-1.8.0-openjdk') # Needed to run AutoFirma app
+install_list+=('java-1.8.0-openjdk') # needed to run AutoFirma app
+install_list+=('p7zip')              # compress / extract 7z
+install_list+=('cronie-anacron')     # anacron - automate tasks
 
 
 ## INSTALL ##
