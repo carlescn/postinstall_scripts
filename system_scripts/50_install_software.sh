@@ -167,4 +167,4 @@ install_list+=('java-1.8.0-openjdk') # needed to run AutoFirma app
 ## INSTALL ##
 
 # Remove and install packages as defined in list
-dnf --refresh shell <(echo -e "${remove_list[@]}\n${install_list[@]}")
+dnf --refresh shell <(echo -e "${remove_list[*]}\n${install_list[*]}")
