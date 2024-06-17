@@ -70,10 +70,14 @@ install_list+=('rsync')  # sync files
 install_list+=('rclone') # backup to cloud services
 
 #[Code]
-install_list+=('code'); add_repo_vscode # VS Code
-install_list+=('gitui')                 # TUI git helper
-install_list+=('shellcheck')            # Bash linter
-install_list+=('android-tools')			# ADB and other Android tools
+add_repo_vscode
+install_list+=('code')           # VS Code
+dnf copr enable atim/lazygit -y
+install_list+=('lazygit')        # TUI git helper
+install_list+=('shellcheck')     # Bash linter
+install_list+=('android-tools')  # ADB and other Android tools
+install_list+=('gcc')
+install_list+=('make')
 
 #[Desktop]
 # i3 windows manager
@@ -84,6 +88,7 @@ install_list+=('i3blocks')  # run scripts to diplay info in i3bar
 remove_list+=('default-fonts-other-sans')  # some of these fonts collide with Nerd Fonts
 install_list+=('blueman')                  # provides bluetooth tray applet
 install_list+=('pavucontrol')              # [volume] gui for controlling pulseaudio volume
+install_list+=('xset')                     # set X display preferences
   # sysstat    [cpu]: in section System monitoring
   # lm_sensors [temp_cpu]: in section System monitoring
   # nvidia-smi [temp_gpu]: run 20_nvidia_driver_470xx.sh
@@ -117,9 +122,11 @@ install_list+=('pcsxr')  # PSX emulator
 install_list+=('zsnes')  # SNES emulator
 
 #[Internet]
-install_list+=('brave-browser'); add_repo_brave_browser # Browser
-install_list+=('thunderbird')                           # E-mail
-install_list+=('nordvpn'); add_repo_nordvpn             # VPN
+add_repo_brave_browser
+install_list+=('brave-browser')  # Browser
+install_list+=('thunderbird')    # E-mail
+add_repo_nordvpn
+install_list+=('nordvpn')        # VPN
 
 #[Localization]
 # Spell checker
