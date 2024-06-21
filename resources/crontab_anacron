@@ -1,1 +1,0 @@
-@hourly anacron -s -t $HOME/.anacron/anacrontab -S $HOME.anacron/spool
