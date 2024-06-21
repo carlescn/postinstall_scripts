@@ -87,6 +87,7 @@ install_list+=('i3blocks')  # run scripts to diplay info in i3bar
 # i3/i3blocks and dependencies
 remove_list+=('default-fonts-other-sans')  # some of these fonts collide with Nerd Fonts
 install_list+=('blueman')                  # provides bluetooth tray applet
+install_list+=('dunst')                    # notification daemon
 install_list+=('pavucontrol')              # [volume] gui for controlling pulseaudio volume
 install_list+=('xset')                     # set X display preferences
   # sysstat    [cpu]: in section System monitoring
