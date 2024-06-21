@@ -39,6 +39,9 @@ echo "[Cloning repository '$repo']"
 git clone --bare "$repo" "$gitdir"
 
 # Config repo
+# Track remote branches (doesn't work out of the box with bare repositories)
+dotfiles config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+# Don't show untracked files
 dotfiles config status.showUntrackedFiles no
 
 # Backup files before checkout
