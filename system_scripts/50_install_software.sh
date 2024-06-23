@@ -97,7 +97,8 @@ install_list+=('xset')                     # set X display preferences
 
 # Some rice
 install_list+=('feh')           # display desktop wallpaper
-install_list+=('lxappearance')  # tool to manage gtk themes
+install_list+=('lxappearance')  # tool to manage GTK themes
+install_list+=('qt5ct')         # tool to manage QT themes
 install_list+=('neofetch')      # system report
 install_list+=('picom')         # composer (enable transparency)
 install_list+=('rofi')          # app launcher
