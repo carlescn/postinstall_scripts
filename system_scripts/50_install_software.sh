@@ -14,30 +14,6 @@ set -e -u -o pipefail
 
 ## REPOS ##
 
-architecture=$(uname -m)
-
-function add_repo {
-	rpm -v --import "$2"
-	dnf config-manager --add-repo "$1"
-}
-
-function add_repo_brave_browser {
-	url_repo='https://brave-browser-rpm-release.s3.brave.com'
-	url_key='https://brave-browser-rpm-release.s3.brave.com/brave-core.asc'
-
-	add_repo "${url_repo}/${architecture}" "${url_key}"
-}
-
-function add_repo_nordvpn {
-	# NOTE: alternatively, you can run the official script instead:
-	# https://downloads.nordcdn.com/apps/linux/install.sh
-
-	url_repo='https://repo.nordvpn.com/yum/nordvpn/centos'
-	url_key='https://repo.nordvpn.com/gpg/nordvpn_public.asc'
-
-	add_repo "${url_repo}/${architecture}" "${url_key}"
-}
-
 function add_repo_vscode {
   # Define URLs
   url_repo='https://packages.microsoft.com/yumrepos/vscode'
@@ -78,6 +54,7 @@ install_list+=('shellcheck')     # Bash linter
 install_list+=('android-tools')  # ADB and other Android tools
 install_list+=('gcc')
 install_list+=('make')
+install_list+=('avrdude')        # tool for programming Atmel AVR MCUs
 
 #[Desktop]
 # i3 windows manager
@@ -96,17 +73,20 @@ install_list+=('xset')                     # set X display preferences
   # nordvpn    [nordvpn]: see Internet section
 
 # Some rice
-install_list+=('feh')           # display desktop wallpaper
-install_list+=('lxappearance')  # tool to manage GTK themes
-install_list+=('qt5ct')         # tool to manage QT themes
-install_list+=('neofetch')      # system report
-install_list+=('picom')         # composer (enable transparency)
-install_list+=('rofi')          # app launcher
+install_list+=('feh')                   # display desktop wallpaper
+install_list+=('fastfetch')             # system report
+install_list+=('picom')                 # composer (enable transparency)
+install_list+=('rofi')                  # app launcher
+install_list+=('lxappearance')          # tool to manage GTK themes
+install_list+=('qt5ct')                 # tool to manage QT themes
+install_list+=('grub-customizer')       # tool to customize grub apperarance
+install_list+=('flat-remix-gtk3-theme') # GTK3 theme
+install_list+=('flat-remix-gtk4-theme') # GTK4 theme
 
-# Terminal apps
-install_list+=('alacritty') # Terminal emulator
-install_list+=('ranger')    # TUI file manager
-install_list+=('w3m')       # Web browser (used for image preview by ranger)
+# Terminal tools
+install_list+=('kitty')     # Terminal emulator
+install_list+=('yazi')      # TUI file manager
+dnf copr enable lihaohong/yazi -y
 install_list+=('fzf')       # Fuzzy finder
 install_list+=('fd-find')   # Better find
 install_list+=('bat')       # Better cat
@@ -117,18 +97,20 @@ install_list+=('zoxide')    # Better cd
 install_list+=('dconf-editor') # Gnome settings editor
 install_list+=('thunar')       # GTK file manager
 install_list+=('maim')         # take screenshots
+install_list+=('libreoffice')  # office suite
+install_list+=('cheese')       # webcam app
+install_list+=('remmina')      # remote desktop client
 
 #[Games]
-install_list+=('steam')  # Steam
-install_list+=('pcsxr')  # PSX emulator
-install_list+=('zsnes')  # SNES emulator
+install_list+=('steam')      # Steam
+install_list+=('pcsxr')      # PSX emulator
+install_list+=('zsnes')      # SNES emulator
+install_list+=('jstest-gtk') # tool to test gamepad
 
 #[Internet]
-add_repo_brave_browser
+dnf config-manager addrepo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
 install_list+=('brave-browser')  # Browser
 install_list+=('thunderbird')    # E-mail
-add_repo_nordvpn
-install_list+=('nordvpn')        # VPN
 
 #[Localization]
 # Spell checker
@@ -154,8 +136,14 @@ install_list+=('sysstat')     # provides sar and other reporting tools
 install_list+=('lm_sensors')  # tools for monitoring hardware
 
 #[Tools]
-install_list+=('p7zip')           # compress / extract 7z
-install_list+=('cronie-anacron')  # anacron - automate tasks
+install_list+=('cronie-anacron') # anacron - automate tasks
+install_list+=('p7zip')          # compress / extract 7z
+install_list+=('yq')             # yaml parser
+install_list+=('pdftk-java')     # pdf tools
+install_list+=('ddccontrol')     # tool to control monitor
+install_list+=('xev')            # diplay X11 events
+install_list+=('testdisk')       # tool to recover files
+install_list+=('tft-server')     # tftp server (to serve router images)
 
 #[Virtualization]
 # TODO: review / document this
@@ -169,8 +157,18 @@ install_list+=('libguestfs-tools')
 install_list+=('guestfs-tools')
 install_list+=('virt-manager')
 
+# Docker
+dnf config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
+install_list+=('docker-ce')
+install_list+=('docker-ce-cli')
+install_list+=('containerd.io')
+install_list+=('docker-buildx-plugin')
+install_list+=('docker-compose-plugin')
+dnf config-manager addrepo --from-repofile=https://nvidia.github.io/libnvidia-container/stable/rpm/nvidia-container-toolkit.repo
+install_list+=('nvidia-container-toolkit')
+
 #[Other]
-install_list+=('java-1.8.0-openjdk') # needed to run AutoFirma app
+install_list+=('java-21-openjdk') # needed to run AutoFirma app
 
 
 ## INSTALL ##
