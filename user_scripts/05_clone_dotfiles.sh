@@ -60,7 +60,7 @@ dotfiles submodule init
 # Backup files if submodule update failed
 if [ -f .gitmodules ]; then
   echo "Backing up pre-existing submodules into '$backupdir'"
-  cat .gitmodules | awk '/\s+path = / {print $3}' | xargs -I{} sh -c "backup {} $worktree $backupdir"
+  awk '/\s+path = / {print $3}' .gitmodules | xargs -I{} sh -c "backup {} $worktree $backupdir"
 fi
 
 dotfiles submodule update
