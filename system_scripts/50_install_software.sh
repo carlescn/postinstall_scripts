@@ -58,8 +58,10 @@ install_list+=('avrdude')        # tool for programming Atmel AVR MCUs
 
 #[Desktop]
 # i3 windows manager
-install_list+=('i3')        # tiling windows manager
-install_list+=('i3blocks')  # run scripts to diplay info in i3bar
+install_list+=('i3')           # tiling windows manager
+install_list+=('i3blocks')     # run scripts to diplay info in i3bar
+dnf copr enable tokariew/i3lock-color -y
+install_list+=('i3lock-color') # lock screen
 
 # i3/i3blocks and dependencies
 remove_list+=('default-fonts-other-sans')  # some of these fonts collide with Nerd Fonts
